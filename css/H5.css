@@ -1,0 +1,11 @@
+.h5{
+	height: 100%;
+}
+.h5_page{
+	height: 100%;
+	width: 100%;
+	position: relative;
+	background-size: 100%;
+	background-repeat: no-repeat;
+
+}

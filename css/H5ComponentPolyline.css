@@ -1,0 +1,15 @@
+/* 折线图组件样式 */
+.h5_component_polyline canvas {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.h5_component_polyline .text {
+	position: absolute;
+	bottom:-20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	text-align: center;
+	transform: scale(0.8);
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+
+    <title>慕课网2015课程学习情况</title>
+
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .component{
+            width: 50%;
+            height: 50px;
+            margin-bottom: 20px;
+            background-color: #eee;
+            display: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="../js/lib/jquery.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery.fullPage.js"></script>
+
+    <script type="text/javascript">
+
+        $(function (){
+            $('#h5').fullpage({
+                'sectionsColor': ['green', 'blue', 'red'],
+                onLeave: function(index, nextIndex, direction){
+                    $('#h5').find('.page').eq(index-1).trigger('onLeave');
+                    // $('#h5').find('.page').eq(index-1).find('.component').trigger('onLeave');加在。page事件中
+
+                },
+                afterLoad: function(anchorLink, index){
+                    $('#h5').find('.page').eq(index-1).trigger('onLoad');
+                    // $('#h5').find('.page').eq(index-1).find('.component').trigger('onLoad');
+                }
+            });
+
+            $('.page').on('onLeave', function(){
+                console.log($(this).attr('id'), '->leave');
+                // $(this).find('.component').trigger('leave');
+                 $(this).find('.component').triggerHandler('onLeave');
+            });
+            $('.page').on('onLoad', function(){
+                console.log($(this).attr('id'), '->load');
+                // $(this).find('.component').trigger('load');
+                 $(this).find('.component').triggerHandler('onLoad');
+            });
+            // $('.component').on('leave', function(){
+            //     $(this).fadeOut();
+            // });
+            // $('.component').on('load', function(){
+            //     $(this).fadeIn();
+            // })
+
+            // 这里的当子元素和父节点绑定相同的事件名的事件时，要注意时间冒泡特性
+            $('.component').on('onLeave', function(){
+                $(this).fadeOut();
+                // return false;放置时间冒泡或用triggerHandler（）调用
+            });
+            $('.component').on('onLoad', function(){
+                $(this).fadeIn();
+            })
+
+
+        });
+
+    </script>
+
+    <body>
+    <!-- 用于验证 fullpage.js 切换页面，以及内容组织结构可用，组件能够进行动画 -->
+
+        <div id="h5">
+            <div class="section page" id="page1">
+                <div class="component">1</div>
+                <div class="component">2</div>
+            </div>
+            <div class="section page" id="page2">
+                <div class="component">1</div>
+            </div>
+            <div class="section page" id="page3">
+                <div class="component">1</div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
